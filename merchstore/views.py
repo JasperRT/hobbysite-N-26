@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import ProductType, Product
 
 def products_list(request):
-    products = Product.objects.all()
+    products = Product.objects.all().order_by('name')
     ctx = {"products": products}
     return render(request, "merchstore/products_list.html", ctx)
 
