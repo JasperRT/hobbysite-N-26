@@ -1,0 +1,17 @@
+{% extends 'commissions/base.html' %}
+
+{% block page_title %}
+    Welcome! Please take a look at the available commissions below.
+{% endblock %}
+{% block content %}
+    {% if commissions.count == 0 %}
+        <br>
+        <i>Notice: No commissions found in the database. Please contact the administrator.</i>
+    {% else %}
+        <ul>
+            {% for commission in commissions %}
+                <li><a href="{{ commission.get_absolute_url }}">{{ commission.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

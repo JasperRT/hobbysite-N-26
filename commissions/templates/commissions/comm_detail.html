@@ -1,0 +1,23 @@
+{% extends 'commissions/base.html' %}
+
+{% block page_title %}
+    You are looking at the commission titled "{{ commission.title }}".
+{% endblock %}
+{% block content %}
+    <ul>
+        People Required: {{ commission.people_req }}
+        <br>
+        Description: {{ commission.description }}
+    </ul>
+    Comments Section:
+    {% if comments.count == 0 %}
+        <br>
+        <i>No comments were found.</i>
+    {% else %}
+        <ul>
+            {% for comment in comments %}
+                <li>{{ comment.entry }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
