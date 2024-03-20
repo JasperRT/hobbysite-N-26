@@ -1,0 +1,17 @@
+{% extends 'merchstore/base.html' %}
+
+{% block page_title %}
+    Welcome! Please take a look at the available merch below.
+{% endblock %}
+{% block content %}
+    {% if products.count == 0 %}
+        <br>
+        <i>Notice: No merch found in the database. Please contact the administrator.</i>
+    {% else %}
+        <ul>
+            {% for product in products %}
+                <li><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
