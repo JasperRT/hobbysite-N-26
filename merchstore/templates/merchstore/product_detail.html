@@ -1,0 +1,12 @@
+{% extends 'merchstore/base.html' %}
+
+{% block page_title %}
+    You are looking at {{ product.name }}, a type of {{ product.product_type.name }}.
+{% endblock %}
+{% block content %}
+    <ul>
+        Price: {{ product.price }}
+        <br>
+        Description: {{ product.description }}
+    </ul>
+{% endblock %}
