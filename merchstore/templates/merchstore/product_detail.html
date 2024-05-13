@@ -1,12 +1,35 @@
-{% extends 'merchstore/base.html' %}
+{% extends 'base.html' %}
 
 {% block page_title %}
     You are looking at {{ product.name }}, a type of {{ product.product_type.name }}.
+    <br>
+    {% if curr_profile == product.owner %}
+        This product was created by you.
+    {% else %}
+        This product is by the user {{ product.owner }}.
+    {% endif %}
 {% endblock %}
 {% block content %}
     <ul>
         Price: {{ product.price }}
         <br>
         Description: {{ product.description }}
+        <br>
+        Status: {{ product.get_status_display }}
+        <br>
+        {% if product.stock != 0 %}
+            Stock: {{ product.stock }}
+        {% endif %}
     </ul>
+    Buy this product:
+    <br>
+    {% if curr_profile == product.owner %}
+        <ul><i>Notice: You cannot buy your own product.</i></ul>
+    {% else %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ trans_form.as_p }}
+        <button type="submit">Buy</button>
+        </form>
+    {% endif %}
 {% endblock %}

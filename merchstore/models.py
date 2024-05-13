@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from user_management.models import Profile
 
 class ProductType(models.Model):
     name = models.CharField(max_length=255)
@@ -26,10 +27,10 @@ class Product(models.Model):
 
     name = models.CharField(max_length=255)
     product_type = models.ForeignKey(ProductType, null=True, on_delete=models.SET_NULL)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField()
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     # Arbitrary max_digits; we assume that no price in the merch store costs more than 1M.
-    price = models.DecimalField(max_digits=9, decimal_places = 2)
+    price = models.DecimalField(max_digits=9, decimal_places=2)
     stock = models.PositiveIntegerField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='AVAIL')
 
@@ -48,7 +49,7 @@ class Transaction(models.Model):
         ('DELIVER', 'Delivered'),
     )
 
-    buyer = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    buyer = models.ForeignKey(Profile, null=True, on_delete=models.SET_NULL)
     product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
     amount = models.PositiveIntegerField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
