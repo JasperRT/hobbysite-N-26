@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    <i>Current Page:</i> History of Purchases
+{% endblock %}
+{% block content %}
+    <br>
+    Below is a history of your purchases, sorted from most recent to oldest.
+    <br><br>
+    {% for owner, purch_list in parted_purch.items %}
+        <i>Products Bought from {{ owner }}</i>
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Created On</th>
+            </tr>
+            {% for entry in purch_list %}
+                <tr>
+                    <th>{{ entry.product.name }}</th>
+                    <th>{{ entry.amount }}</th>
+                    <th>{{ entry.get_status_display }}</th>
+                    <th>{{ entry.created_on }}</th>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endfor %}
+{% endblock %}
+

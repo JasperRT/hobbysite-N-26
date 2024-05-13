@@ -8,7 +8,7 @@ urlpatterns = [
     path('item/add/', product_create, name='product_create'),
     path('item/<int:id>/edit/', product_update, name='product_update'),
     path('cart/', cart_view, name='cart_view'),
-    path('transactions/', transactions_list, name='transaction_list'),
+    path('transactions/', transactions_list, name='transactions_list'),
 ]
 
 app_name = 'merchstore'

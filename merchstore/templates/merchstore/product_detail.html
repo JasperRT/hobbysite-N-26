@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block page_title %}
-    You are looking at {{ product.name }}, a type of {{ product.product_type.name }}.
+    <i>Current Page:</i> Viewing {{ product.name }}, a type of {{ product.product_type.name }}.
     <br>
     {% if curr_profile == product.owner %}
         This product was created by you.
     {% else %}
-        This product is by the user {{ product.owner }}.
+        This product was created by the user {{ product.owner }}.
     {% endif %}
 {% endblock %}
 {% block content %}

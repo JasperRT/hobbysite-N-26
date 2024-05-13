@@ -52,7 +52,7 @@ class Transaction(models.Model):
     )
 
     buyer = models.ForeignKey(Profile, null=True, on_delete=models.SET_NULL)
-    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
+    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL, related_name='transactions')
     amount = models.PositiveIntegerField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     created_on = models.DateTimeField(auto_now_add=True)

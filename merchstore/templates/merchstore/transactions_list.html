@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    <i>Current Page:</i> History of Sale Transactions
+{% endblock %}
+{% block content %}
+    <br>
+    Below is a history of your transactions, sorted from most recent to oldest.
+    <br><br>
+    {% for buyer, trans_list in parted_trans.items %}
+        <i>Products Bought by {{ buyer }}</i>
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Total Cost</th>
+                <th>Status</th>
+                <th>Created On</th>
+            </tr>
+            {% for entry in trans_list %}
+                <tr>
+                    <th>{{ entry.product.name }}</th>
+                    <th>{{ entry.product.price }}</th>
+                    <th>{{ entry.amount }}</th>
+                    <th>{% widthratio entry.product.price 1 entry.amount %}</th>
+                    <th>{{ entry.get_status_display }}</th>
+                    <th>{{ entry.created_on }}</th>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endfor %}
+{% endblock %}
+
