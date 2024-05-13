@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    <i>Current Page:</i> Updating Profile
+{% endblock %}
+{% block content %}
+    <br>
+    You are currently logged in as the user {{ profile.display_name }}.
+    <br>
+    Your email address is {{ profile.email }}.
+    <br><br>
+    <i>Please enter your new info below.</i>
+    <form method="POST">
+        {% csrf_token %}
+        {{ update_form.as_p }}
+        <button type="submit">Update</button>
+    </form>
+{% endblock %}

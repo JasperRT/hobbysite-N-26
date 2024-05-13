@@ -31,6 +31,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Automatic redirects for users logging in/out
+
+LOGIN_REDIRECT_URL = '../../profile'
+
+LOGOUT_REDIRECT_URL = '../../accounts/login'
 
 # Application definition
 
@@ -42,7 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'merchstore',
-    'commissions'
+    'commissions',
+    'user_management'
 ]
 
 MIDDLEWARE = [
@@ -60,7 +66,7 @@ ROOT_URLCONF = 'hobbysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [(os.path.join(BASE_DIR, 'templates')),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

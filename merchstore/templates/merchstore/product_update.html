@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    <i>Current Page:</i> Updating the product {{ product.name }}
+{% endblock %}
+{% block content %}
+    {% if curr_profile == product.owner %}
+        <br>
+        Please update the information below:
+        <form method="POST">
+            {% csrf_token %}
+            {{ prod_update_form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    {% else %}
+        <br>
+        <i>Notice: Access denied. You are not the owner of this product.</i>
+    {% endif %}
+{% endblock %}
