@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>Hobby Site</title>
+    <header>
+        <b>Hobby Site</b>
+        {% block user_button %}
+            <div id="user_button">
+                {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Logout Here!</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">
+                        <button type="button">Login Here!</button>
+                    </a>
+                    <br>
+                {% endif %}
+                <br>
+            </div>
+        {% endblock %}
+        <div id="page_title">
+            {% block page_title %}{% endblock %}
+        </div>
+    </header>
+</head>
+<body>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
