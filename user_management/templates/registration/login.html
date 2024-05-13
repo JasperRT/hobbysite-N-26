@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block user_button %}{% endblock %}
+{% block page_title %}
+    <i>Current Page:</i> Logging In
+{% endblock %}
+{% block content %}
+    <br>
+    <b>Welcome to the Hobby Site!</b>
+    <i>Please enter your credentials below.</i>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+{% endblock %}
