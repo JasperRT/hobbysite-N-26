@@ -31,6 +31,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Automatic redirects for users logging in/out
+
+LOGIN_REDIRECT_URL = '../../profile'
+
+LOGOUT_REDIRECT_URL = '../../accounts/login'
 
 # Application definition
 
@@ -61,7 +66,7 @@ ROOT_URLCONF = 'hobbysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [(os.path.join(BASE_DIR, 'templates')),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
