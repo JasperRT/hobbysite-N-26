@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    You are creating a new product for the merchandise store.
+{% endblock %}
+{% block content %}
+    Please enter the relevant information below:
+    <form method="POST">
+        {% csrf_token %}
+        {{ prod_form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from user_management.models import Profile
+from django.core.validators import MinValueValidator
+from decimal import Decimal
 
 class ProductType(models.Model):
     name = models.CharField(max_length=255)
@@ -30,7 +32,7 @@ class Product(models.Model):
     description = models.TextField()
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     # Arbitrary max_digits; we assume that no price in the merch store costs more than 1M.
-    price = models.DecimalField(max_digits=9, decimal_places=2)
+    price = models.DecimalField(max_digits=9, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))])
     stock = models.PositiveIntegerField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='AVAIL')
 
@@ -56,4 +58,4 @@ class Transaction(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return str(self.id)

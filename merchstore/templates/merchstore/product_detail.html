@@ -24,12 +24,33 @@
     Buy this product:
     <br>
     {% if curr_profile == product.owner %}
-        <ul><i>Notice: You cannot buy your own product.</i></ul>
-    {% else %}
+        <br>
+        <i>Notice: You cannot buy your own products.</i>
         <form method="POST">
             {% csrf_token %}
             {{ trans_form.as_p }}
-        <button type="submit">Buy</button>
+        <button type="submit" disabled>Buy</button>
         </form>
+        <br><br>
+        Update this product's details:
+        <br><br>
+        <a href="{% url 'merchstore:product_update' product.id %}">
+            <button type="button">Update</button>
+        </a>
+    {% else %}
+        {% if product.stock != 0 %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ trans_form.as_p }}
+            <button type="submit">Buy</button>
+            </form>
+        {% else %}
+            <ul><i>Notice: This product is out of stock.</i></ul>
+            <form method="POST">
+                {% csrf_token %}
+                {{ trans_form.as_p }}
+            <button type="submit" disabled>Buy</button>
+            </form>
+        {% endif %}
     {% endif %}
 {% endblock %}
