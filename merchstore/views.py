@@ -100,7 +100,6 @@ def cart_view(request):
     curr_profile = Profile.objects.get(user=request.user)
     user_purch = Transaction.objects.filter(buyer=curr_profile).order_by('-created_on')
 
-    print(user_purch)
 
     parted_purch = {}
 
