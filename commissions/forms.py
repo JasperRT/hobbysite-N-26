@@ -1,20 +1,26 @@
 from django import forms
-from .models import Product, Transaction
+from .models import Commission, Job, JobApplication
 
 
-class ProductForm(forms.ModelForm):
+class CommissionForm(forms.ModelForm):
     class Meta:
-        model = Product
-        fields = ('name', 'owner', 'product_type', 'description', 'price', 'stock', 'status')
+        model = Commission
+        fields = ('title', 'author', 'description', 'status',)
         widgets = {
-            'owner': forms.Select(attrs={
+            'author': forms.Select(attrs={
                 "style": "pointer-events: none; background-color : #CCCCCC",
                 "tabindex": "-1",
-        })
+            })
         }
 
 
-class TransactionForm(forms.ModelForm):
+class JobForm(forms.ModelForm):
     class Meta:
-        model = Transaction
-        fields = ('amount',)
+        model = Job
+        fields = ('commission', 'role', 'manpower_required', 'status',)
+
+
+class JobApplicationForm(forms.ModelForm):
+    class Meta:
+        model = JobApplication
+        fields = ('job',)

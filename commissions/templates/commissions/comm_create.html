@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
 
 {% block page_title %}
-    <i>Current Page:</i> Creating a new product
+    <i>Current Page:</i> Creating new commissions and jobs
 {% endblock %}
 {% block content %}
     <br>
-    Please enter the relevant information below:
+    Please enter relevant commission data below:
     <form method="POST">
         {% csrf_token %}
-        {{ prod_form.as_p }}
-        <button type="submit">Submit</button>
+        {{ comm_form.as_p }}
+        <button type="submit" name="comm_submit">Submit</button>
+    </form>
+    <br><br>
+    Complete your commission by adding the jobs it requires:
+    <form method="POST">
+        {% csrf_token %}
+        {{ job_form.as_p }}
+        <button type="submit" name="job_submit">Add Job</button>
     </form>
 {% endblock %}

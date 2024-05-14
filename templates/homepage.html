@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    <b>Welcome to Hobby Site!</b>
+{% endblock %}
+{% block content %}
+    There are two applications available.
+    <br><br>
+    <a href="{% url 'merchstore:products_list' %}">
+        Merchandise Store
+    </a>
+    <br>
+    <a href="{% url 'commissions:comms_list' %}">
+        Commissions Board
+    </a>
+    <br><br>
+    {% if user.is_authenticated %}
+        You may edit your profile details below:
+        <br>
+        <a href="{% url 'user_management:update_profile' %}">
+            <button type="button">Profile</button>
+        </a>
+    {% endif %}
+    <br><br>
+    If you wish to create a new account, please register below:
+    <br>
+    <a href="{% url 'user_management:register' %}">
+        <button type="button">Register</button>
+    </a>
+{% endblock %}
+
