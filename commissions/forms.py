@@ -10,7 +10,7 @@ class ProductForm(forms.ModelForm):
             'owner': forms.Select(attrs={
                 "style": "pointer-events: none; background-color : #CCCCCC",
                 "tabindex": "-1",
-            })
+        })
         }
 
 

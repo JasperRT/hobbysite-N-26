@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    <i>Current Page:</i> Creating a new product
+{% endblock %}
+{% block content %}
+    <br>
+    Please enter the relevant information below:
+    <form method="POST">
+        {% csrf_token %}
+        {{ prod_form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
