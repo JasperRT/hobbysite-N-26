@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 
 # Automatic redirects for users logging in/out
 
-LOGIN_REDIRECT_URL = '../../profile'
+LOGIN_REDIRECT_URL = '../../home'
 
 LOGOUT_REDIRECT_URL = '../../accounts/login'
 

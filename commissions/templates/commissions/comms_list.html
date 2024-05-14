@@ -1,17 +1,53 @@
-{% extends 'commissions/base.html' %}
+{% extends 'base.html' %}
 
 {% block page_title %}
-    Welcome! Please take a look at the available commissions below.
+    <i>Current Page:</i> List of commissions <br>
+    Welcome! Please take a look at the commissions available below.
 {% endblock %}
 {% block content %}
-    {% if commissions.count == 0 %}
+    {% if all_comms.count == 0 %}
         <br>
-        <i>Notice: No commissions found in the database. Please contact the administrator.</i>
+        <i>Notice: No entries found in the database. Login to add some.</i>
+        <br>
     {% else %}
-        <ul>
-            {% for commission in commissions %}
-                <li><a href="{{ commission.get_absolute_url }}">{{ commission.title }}</a></li>
-            {% endfor %}
-        </ul>
+        <br>
+        {% if user.is_authenticated %}
+            <i>Your created commissions:</i>
+            <ul>
+                {% if created_comms.count == 0 %}
+                    <i>You have not created any commissions.</i>
+                {% else %}
+                    {% for comm in created_comms %}
+                        <li><a href="{{ comm.get_absolute_url }}">{{ comm.title }}</a></li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+            <i>Commissions you applied for:</i>
+            <ul>
+                {% if applied_comms.count == 0 %}
+                    <i>You have not applied for any commissions.</i>
+                {% else %}
+                    {% for comm in applied_comms %}
+                        <li><a href="{{ comm.get_absolute_url }}">{{ comm.title }}</a></li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        {% endif %}
+            <i>All commissions:</i>
+            <ul>
+                {% for comm in all_comms %}
+                    <li><a href="{{ comm.get_absolute_url }}">{{ comm.title }}</a></li>
+                {% endfor %}
+            </ul>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <br>
+        <i>Create a new commission or add a job to an existing one:</i>
+        <br><br>
+        <a href="{% url 'commissions:comm_create' %}">
+            <button type="button">New Commission</button>
+        </a>
+    {% else %}
+        <i>Log in to create a commission...</i>
     {% endif %}
 {% endblock %}

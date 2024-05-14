@@ -7,7 +7,8 @@
 {% block content %}
     {% if products.count == 0 %}
         <br>
-        <i>Notice: No merch found in the database. Please contact the administrator.</i>
+        <i>Notice: No merch found in the database. Login to add some.</i>
+        <br>
     {% else %}
         <br>
         {% if user.is_authenticated %}

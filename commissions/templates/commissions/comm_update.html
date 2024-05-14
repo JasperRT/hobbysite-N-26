@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    <i>Current Page:</i> Updating existing commissions
+{% endblock %}
+{% block content %}
+    <br>
+    Please update relevant commission data below:
+    <form method="POST">
+        {% csrf_token %}
+        {{ comm_update_form.as_p }}
+        <button type="submit" name="comm_submit">Submit</button>
+    </form>
+    <br><br>
+{% endblock %}

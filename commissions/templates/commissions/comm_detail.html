@@ -1,23 +1,39 @@
-{% extends 'commissions/base.html' %}
+{% extends 'base.html' %}
 
 {% block page_title %}
-    You are looking at the commission titled "{{ commission.title }}".
+    <i>Current Page:</i> "{{ comm.title }}", a commission from the user {{ comm.author }}.
 {% endblock %}
 {% block content %}
     <ul>
-        People Required: {{ commission.people_req }}
-        <br>
-        Description: {{ commission.description }}
+        Manpower Required: {{ manpower_needed }} <br>
+        Open Manpower: {{ open_manpower }} <br>
+        Description: {{ comm.description }}
     </ul>
-    Comments Section:
-    {% if comments.count == 0 %}
+    {% if user.is_authenticated %}
         <br>
-        <i>No comments were found.</i>
+        Applying? Pick a job to apply for below:
+        {% if comm.author == curr_profile %}
+            <br><br>
+            <i>Notice: You cannot apply for a commission you have authored yourself.</i>
+            <form method="POST">
+                {% csrf_token %}
+                {{ job_apply_form.as_p }}
+                <button type="submit" disabled>Apply to Job</button>
+            </form>
+            <br>
+            You may edit the commission instead.
+            <br><br>
+            <a href="{% url 'commissions:comm_update' comm.id %}">
+                <button type="button">Edit Commission</button>
+            </a>
+        {% else %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ job_apply_form.as_p }}
+                <button type="submit">Apply to Job</button>
+            </form>
+        {% endif %}
     {% else %}
-        <ul>
-            {% for comment in comments %}
-                <li>{{ comment.entry }}</li>
-            {% endfor %}
-        </ul>
+        <i>Log in to apply for this commission.</i>
     {% endif %}
 {% endblock %}
